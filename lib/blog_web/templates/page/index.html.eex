@@ -1,0 +1,8 @@
+
+
+<%= for post <- @posts do %>
+  
+  <%= render "_post_resume.html", conn: @conn, post: post %>
+
+  ...
+<% end %>

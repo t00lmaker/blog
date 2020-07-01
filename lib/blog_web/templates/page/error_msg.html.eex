@@ -1,0 +1,7 @@
+
+
+<section class="row">
+  <article class="msg"> 
+    <h3><%= @msg %></h3>
+  </article>
+</section>

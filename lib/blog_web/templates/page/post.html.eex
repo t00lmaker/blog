@@ -1,0 +1,8 @@
+
+<%= render "_post_resume.html", conn: @conn, post: @post %>
+
+<section class="row">
+  <article class="column">
+    <%= raw(@post.body) %>
+  </article>
+</section>

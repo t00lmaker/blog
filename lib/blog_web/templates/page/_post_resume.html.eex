@@ -1,0 +1,24 @@
+<section class="row">
+    <article class="column">
+    <a href="<%= Routes.page_path(@conn, :get, @post.id) %>">
+      <h2><%= @post.title %></h2>
+    </a>
+    
+    <p>
+      
+      <a href="<%= Routes.page_path(@conn, :date, @post.date.year, @post.date.month) %>">
+        <span class="date">
+          <%= @post.date %>
+        </span>
+      </a>
+
+      <%= for tag <- @post.tags do %>
+        <span class="tag">
+          <a href="<%= Routes.page_path(@conn, :tag, tag) %>"> <%= tag %> </a>
+        </span>
+      <% end %>
+    </p>
+
+    <p class="description"><%= @post.description %></p>
+  </article>
+</section>
