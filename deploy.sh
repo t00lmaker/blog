@@ -1,17 +1,11 @@
 #!/bin/bash
 
-export MIX_ENV=prd
-
 mix -v
 
 if [ $? -eq 0 ]; then
   echo " mix ok"
   
-  mix deps.get --only prod \
-    && mix compile \
-    && npm run deploy --prefix ./assets \
-    && mix phx.digest
-	    
+  mix deps.get --only prod
 
   if [ $? -eq 0 ]; then
     echo " Dependencies installed "   
@@ -20,12 +14,15 @@ if [ $? -eq 0 ]; then
     exit 0
   fi 
 
-  mix phx.gen.secret
+  export SECRET_KEY_BASE=$(mix phx.gen.secret)
+  export DATABASE_URL=ecto://USER:PASS@HOST/database
+  
+  export MIX_ENV=prod
 
-  if [ $? -eq 0 ]; then
-      echo " key generate  $? " 
-  fi
-
+  mix compile \
+    && npm run deploy --prefix ./assets \
+    && mix phx.digest
+	
   exit 0
 else
   echo " mix not found"
