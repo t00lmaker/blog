@@ -2,7 +2,7 @@ defmodule Blog.Posts do
 
   use NimblePublisher,
     build: Blog.Post,
-    from: "/home/luan/Documents/Blog/**/*.md",
+    from: System.get_env("PATH_TEXTS") || "/home/luan/Documents/Blog/**/*.md",
     as: :posts,
     highlighters: [:makeup_elixir, :makeup_erlang]
 
