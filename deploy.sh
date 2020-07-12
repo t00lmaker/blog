@@ -18,7 +18,7 @@ if [ $? -eq 0 ]; then
   export DATABASE_URL=ecto://USER:PASS@HOST/database
   
   export MIX_ENV=prod
-  export PORT=80
+  export PORT=8080
 
   mix compile
 
