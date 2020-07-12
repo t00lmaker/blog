@@ -18,7 +18,7 @@ if [ $? -eq 0 ]; then
   export DATABASE_URL=ecto://USER:PASS@HOST/database
   
   export MIX_ENV=prod
-  export MIX_PORT=8080
+  export PORT=80
 
   mix compile
 
@@ -28,14 +28,22 @@ if [ $? -eq 0 ]; then
     echo "npm not found" 
     npm install -g npm
   fi
+
+  npm install --prefix ./assets
     
   npm run deploy --prefix ./assets
   
   mix phx.digest
 
-  mix phx.server
+  mix distillery.init
+
+  mix distillery.release
+
+  echo "start server port: $PORT" 
   
-  exit 0
+  nohup _build/prod/rel/blog/bin/blog foreground &
+  
+  exit 0   
 else
   echo " mix not found"
   exit 1
