@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
     exit 0
   fi 
 
+  export PATH_TEXTS="~/blog-texts/"
   export SECRET_KEY_BASE=$(mix phx.gen.secret)
   export DATABASE_URL=ecto://USER:PASS@HOST/database
   
